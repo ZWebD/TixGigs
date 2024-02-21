@@ -3,7 +3,7 @@ import Image from "next/image";
 
 export default function Intro() {
   return (
-    <div>
+    <section className="xl:mt-40 mt-28 mb-28 max-w-[50rem] text-center sm:mb-0 ">
       <div>
         <h1 className="">Welcome to Ticket Toaster! </h1>
         <h2>
@@ -19,6 +19,6 @@ export default function Intro() {
         height={47}
         priority
       />
-    </div>
+    </section>
   );
 }

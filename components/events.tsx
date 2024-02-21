@@ -44,17 +44,22 @@ const ClientMyComponent = () => {
   }, [getData]);
 
   return (
-    <div className="flex flex-row flex-wrap ">
+    <section className="flex flex-row flex-wrap ">
+      <>
+        {error ? <p>{error}</p> : null}
+        {isLoading ? <p>Loading...</p> : null}
+        {isError ? <p>Error</p> : null}
+      </>
       {data?.map((event, n) => (
-        <div
+        <section
           id={`event_${n}`}
           key={n}
-          className=" bg-gray-100 max-w-[40rem] border border-black/5 rounded-lg overflow-hidden  relative hover:bg-gray-200 transition dark:bg-white/10 dark:hover:bg-white/20 dark:text-white"
+          className=" bg-gray-100 max-md:min-w-full border border-black/5 rounded-lg overflow-hidden  relative hover:bg-gray-200 transition dark:bg-white/10 dark:hover:bg-white/20 dark:text-white"
         >
           <Event event={event} />
-        </div>
+        </section>
       ))}
-    </div>
+    </section>
   );
 };
 
