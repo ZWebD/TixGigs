@@ -19,11 +19,30 @@ export default function Events(props: any) {
     backgroundPosition: "top",
   };
   const { lighterColor } = useExtractColor(url, { format: "rgba" });
+
+  // Adding alpha value to RGB color
+
+  const rgbaBg = rgbToRgba(lighterColor, 0.4);
+
+  function rgbToRgba(rgb: any, alpha: number) {
+    const match = rgb?.match(
+      /rgb?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*(\d+(\.\d+)?))?\)/
+    );
+    if (!match) return null;
+
+    const r = parseInt(match[1]);
+    const g = parseInt(match[2]);
+    const b = parseInt(match[3]);
+    const a = alpha;
+
+    return `rgba(${r},${g},${b},${a})`;
+  }
+
   const divBgColor = {
     backgroundColor: `${lighterColor}`,
   };
   const divBgColorOpacity = {
-    backgroundColor: `rgba(33, 33, 33, 0.4)`,
+    backgroundColor: `${rgbaBg}`,
     // `${lighterColor}`,
     // opacity: 0.6,
   };
