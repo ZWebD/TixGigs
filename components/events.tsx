@@ -44,7 +44,7 @@ const ClientMyComponent = () => {
   }, [getData]);
 
   return (
-    <section className="flex flex-row flex-wrap ">
+    <section className="flex flex-col sm:flex-row flex-wrap ">
       <>
         {error ? <p>{error}</p> : null}
         {isLoading ? <p>Loading...</p> : null}
@@ -54,7 +54,7 @@ const ClientMyComponent = () => {
         <section
           id={`event_${n}`}
           key={n}
-          className=" bg-gray-100 max-md:min-w-full border border-black/5 rounded-lg overflow-hidden  relative hover:bg-gray-200 transition dark:bg-white/10 dark:hover:bg-white/20 dark:text-white"
+          className="relative mb-24  md:w-1/2 md:odd:last:m-auto odd:last:pr-0 md:odd:pr-3 md:even:pl-3"
         >
           <Event event={event} />
         </section>

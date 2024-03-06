@@ -43,27 +43,22 @@ export default function Events(props: any) {
   };
   const divBgColorOpacity = {
     backgroundColor: `${rgbaBg}`,
-    // `${lighterColor}`,
-    // opacity: 0.6,
   };
 
   return (
     <div
-      className="relative overflow-hidden rounded-lg pb-7 justify-items-stretch justify-evenly flex flex-col sm:group-even:ml-[18rem]"
+      className="relative overflow-hidden rounded-lg pb-7 justify-items-stretch justify-evenly flex flex-col sm:group-even:ml-[18rem] max-w[42rem] group-even:pl-10 group-odd:pl-10 border border-black/5 bg-gray-100 hover:bg-gray-200 transition dark:bg-white/10 dark:hover:bg-white/20 dark:text-white"
       style={divBgColor}
     >
-      {/* <>
-        <Image width={500} height={40} src={url} alt={event.name} />
-      </> */}
       <div
-        className="bg-to bg-center bg-cover bg-no-repeat w-full h-48  sm:max-w"
+        className="bg-center bg-cover bg-no-repeat w-full h-80 min-w-max "
         style={divBgImage}
       >
-        <h2 className=" text-3xl" style={divBgColorOpacity}>
+        <h2 className=" text-3xl pt-4 pb-4" style={divBgColorOpacity}>
           {event.name}
         </h2>
       </div>
-      <div className=" whitespace-pre-line w-6/12">
+      <div className=" whitespace-pre-line pb-7 sm:pt-10 sm:max-w-auto flex flex-col sm:group-even:ml-[18rem]">
         <p className="mt-2 leading-relaxed text-gray-700 dark:text-white/70">
           {event.promoter?.name || <br />}
         </p>
