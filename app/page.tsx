@@ -4,7 +4,7 @@ import Intro from "@/components/intro";
 
 export default function Home() {
   return (
-    <main className="w-full  flex flex-col text-center min-h-screen items-center justify-between p-24">
+    <main className="container mx-auto w-full lx:max-w-[65%] flex flex-col text-center min-h-screen items-center justify-between px-24">
       <Intro />
       <ClientMyComponent />
       <Footer />

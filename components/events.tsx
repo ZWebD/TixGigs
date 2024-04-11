@@ -44,21 +44,30 @@ const ClientMyComponent = () => {
   }, [getData]);
 
   return (
-    <section className="flex flex-col sm:flex-row flex-wrap ">
+    <section>
       <>
         {error ? <p>{error}</p> : null}
-        {isLoading ? <p>Loading...</p> : null}
+        {isLoading ? (
+          <p className="text-4xl my-24 font-black">Loading...</p>
+        ) : null}
         {isError ? <p>Error</p> : null}
+        {data ? (
+          <div>
+            <h2 className=" text-4xl my-24 font-black">Upcoming Events</h2>
+            <span className="flex flex-col sm:flex-row flex-wrap ">
+              {data?.map((event, n) => (
+                <section
+                  id={`event_${n}`}
+                  key={n}
+                  className="relative mb-24 w-full md:w-1/2 md:odd:last:m-auto odd:last:pr-0 md:odd:pr-3 md:even:pl-3"
+                >
+                  <Event event={event} />
+                </section>
+              ))}
+            </span>
+          </div>
+        ) : null}
       </>
-      {data?.map((event, n) => (
-        <section
-          id={`event_${n}`}
-          key={n}
-          className="relative mb-24  md:w-1/2 md:odd:last:m-auto odd:last:pr-0 md:odd:pr-3 md:even:pl-3"
-        >
-          <Event event={event} />
-        </section>
-      ))}
     </section>
   );
 };

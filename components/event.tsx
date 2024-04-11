@@ -50,19 +50,19 @@ export default function Events(props: any) {
       className="relative overflow-hidden rounded-lg pb-7 justify-items-stretch justify-evenly flex flex-col sm:group-even:ml-[18rem] max-w[42rem] group-even:pl-10 group-odd:pl-10 border border-black/5 bg-gray-100 hover:bg-gray-200 transition dark:bg-white/10 dark:hover:bg-white/20 dark:text-white"
       style={divBgColor}
     >
-      <div
-        className="bg-center bg-cover bg-no-repeat w-full h-80 min-w-max "
-        style={divBgImage}
-      >
-        <h2 className=" text-3xl pt-4 pb-4" style={divBgColorOpacity}>
-          {event.name}
-        </h2>
-      </div>
-      <div className=" whitespace-pre-line pb-7 sm:pt-10 sm:max-w-auto flex flex-col sm:group-even:ml-[18rem]">
-        <p className="mt-2 leading-relaxed text-gray-700 dark:text-white/70">
+      <div className=" whitespace-pre-line pb-7 sm:max-w-auto flex flex-col sm:group-even:ml-[18rem]">
+        {/* <p className="mt-2 leading-relaxed text-gray-700 dark:text-white/70">
           {event.promoter?.name || <br />}
-        </p>
-        <a href={props.event.url}>Event link</a>
+        </p> */}
+        <a href={props.event.url} target="_blank" className=" font-medium">
+          <div
+            className="bg-center rounded-b-3xl  bg-cover bg-no-repeat w-full h-80 min-w-max "
+            style={divBgImage}
+          ></div>
+          <h3 className=" text-2xl py-4 font-bold" style={divBgColorOpacity}>
+            {event.name}
+          </h3>
+        </a>
       </div>
     </div>
   );
