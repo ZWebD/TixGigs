@@ -3,12 +3,12 @@ import Image from "next/image";
 
 export default function Intro() {
   return (
-    <section className="xl:mt-40 mt-28 mb-28 w-full text-center sm:mb-0 justify-center">
-      <div className="mb-24">
-        <h1 className="text-7xl font-black mb-20">
+    <section className="xl:mt-40 my-[14%] w-full text-center sm:mb-0 justify-center">
+      <div className="mb-[12%]">
+        <h1 className="text-4xl sm:text-5xl md:text-7xl font-black mb-[8%]">
           Welcome to Ticket Toaster!{" "}
         </h1>
-        <h2 className=" text-3xl font-black">
+        <h2 className="text-xl md:text-3xl px-[10%] font-bold">
           Where you can find what you looking for Music, Sport, Arts, Theatre,
           Comedy and many more
         </h2>

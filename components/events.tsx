@@ -48,18 +48,18 @@ const ClientMyComponent = () => {
       <>
         {error ? <p>{error}</p> : null}
         {isLoading ? (
-          <p className="text-4xl my-24 font-black">Loading...</p>
+          <p className="text-3xl my-[10%] font-black">Loading...</p>
         ) : null}
         {isError ? <p>Error</p> : null}
         {data ? (
           <div>
-            <h2 className=" text-4xl my-24 font-black">Upcoming Events</h2>
-            <span className="flex flex-col sm:flex-row flex-wrap ">
+            <h2 className=" text-3xl my-[10%] font-black">Upcoming Events</h2>
+            <span className="flex flex-col sm:flex-row flex-wrap max-w-[75%] mx-auto">
               {data?.map((event, n) => (
                 <section
                   id={`event_${n}`}
                   key={n}
-                  className="relative mb-24 w-full md:w-1/2 md:odd:last:m-auto odd:last:pr-0 md:odd:pr-3 md:even:pl-3"
+                  className="relative mb-[10%] w-full md:w-1/2 md:odd:last:m-auto odd:last:pr-0 md:odd:pr-3 md:even:pl-3"
                 >
                   <Event event={event} />
                 </section>
