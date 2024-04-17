@@ -6,7 +6,7 @@ export default function Home() {
   return (
     <main
       className={
-        "container mx-auto w-full xl:max-w-[65%] flex flex-col text-center min-h-screen items-center justify-between px-[8%]"
+        "container mx-auto w-full xl:max-w-[65%] flex flex-col text-center min-h-screen items-center justify-between px-[8%] font-bold"
       }
     >
       <Intro />

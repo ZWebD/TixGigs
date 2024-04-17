@@ -54,7 +54,7 @@ const ClientMyComponent = () => {
         {data ? (
           <div>
             <h2 className=" text-3xl my-[10%] font-black">Upcoming Events</h2>
-            <span className="flex flex-col sm:flex-row flex-wrap max-w-[75%] mx-auto">
+            <span className="flex flex-col sm:flex-row flex-wrap lg:max-w-[85%] mx-auto">
               {data?.map((event, n) => (
                 <section
                   id={`event_${n}`}

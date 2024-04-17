@@ -60,7 +60,7 @@ export default function Events(props: any) {
             style={divBgImage}
           ></div>
           <h3
-            className="md:text-lg text-2xl min-h-28 justify-self-center content-center px-[4%] font-bold"
+            className="md:text-lg text-2xl min-h-28 content-center px-[4%]"
             style={divBgColorOpacity}
           >
             {event.name}
