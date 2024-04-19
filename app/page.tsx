@@ -1,5 +1,5 @@
 import Footer from "@/components/footer";
-import ClientMyComponent from "@/components/events";
+import Events from "@/components/events";
 import Intro from "@/components/intro";
 
 export default function Home() {
@@ -10,7 +10,7 @@ export default function Home() {
       }
     >
       <Intro />
-      <ClientMyComponent />
+      <Events />
       <Footer />
     </main>
   );

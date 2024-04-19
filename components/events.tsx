@@ -4,6 +4,8 @@ import { getDataOnServer } from "@/actions/getDataOnServer";
 import { useCallback, useEffect, useState } from "react";
 import React from "react";
 import Event from "./event";
+import Search from "@/components/search";
+
 
 type Data = [
   {
@@ -22,7 +24,8 @@ type Data = [
   }
 ];
 
-const ClientMyComponent = () => {
+
+const Events = () => {
   const [data, setData] = useState<Data>();
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -43,9 +46,22 @@ const ClientMyComponent = () => {
     getData();
   }, [getData]);
 
+  const [searchValue, setSearchValue] = useState("");
+
+  const handleSearch = (value: string) => {
+    console.log(value);
+    setSearchValue(value);
+  };
+
   return (
     <section>
       <>
+      <div>
+      <Search onSearch={handleSearch} />
+      <h2 className="text-2xl mt-20 mx-2 underline"></h2>
+      <p className="text-2xl m-2">{searchValue}</p>
+
+      </div>
         {error ? <p>{error}</p> : null}
         {isLoading ? (
           <p className="text-3xl my-[10%] font-black">Loading...</p>
@@ -72,4 +88,4 @@ const ClientMyComponent = () => {
   );
 };
 
-export default ClientMyComponent;
+export default Events;
