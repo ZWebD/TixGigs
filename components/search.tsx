@@ -14,13 +14,11 @@ export default function Search(props: SearchProps) {
   const searchHandler = (event: ChangeEvent<HTMLInputElement>) => {
     const { target } = event;
     setValue(target.value);
-    console.log(value);
   };
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter") {
       onSearch(value);
-      console.log(value);
     }
   };
 

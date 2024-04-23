@@ -48,8 +48,6 @@ const Events = () => {
   const handleSearch = (value: string) => {
     console.log(value);
     setSearchValue(value);
-
-    // getData();
   };
 
   return (
@@ -57,8 +55,6 @@ const Events = () => {
       <>
         <div>
           <Search onSearch={handleSearch} />
-          {/* <h2 className="text-2xl mt-20 mx-2 underline"></h2>
-          <p className="text-2xl m-2">{searchValue}</p> */}
         </div>
         {error ? <p>{error}</p> : null}
         {isLoading ? (

@@ -46,8 +46,6 @@ export const getDataOnServer = async (props: any) => {
   let isError = false;
   let error = "";
 
-  console.log(url);
-
   try {
     const res = await fetch(url);
     const filter: any = res
