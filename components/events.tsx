@@ -6,7 +6,6 @@ import React from "react";
 import Event from "./event";
 import Search from "@/components/search";
 
-
 type Data = [
   {
     name: string;
@@ -24,44 +23,43 @@ type Data = [
   }
 ];
 
-
 const Events = () => {
   const [data, setData] = useState<Data>();
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
+  const [searchValue, setSearchValue] = useState("");
 
   const getData = useCallback(async () => {
     setIsLoading(true);
-    const { data, isError, error } = await getDataOnServer();
+    const { data, isError, error } = await getDataOnServer(searchValue);
     setIsLoading(false);
     if (!isError) setData(data);
     else {
       setIsError(isError);
       setError(error);
     }
-  }, [setData]);
+  }, [setData, setError, setIsError, searchValue]);
 
   useEffect(() => {
     getData();
   }, [getData]);
 
-  const [searchValue, setSearchValue] = useState("");
-
   const handleSearch = (value: string) => {
     console.log(value);
     setSearchValue(value);
+
+    // getData();
   };
 
   return (
     <section>
       <>
-      <div>
-      <Search onSearch={handleSearch} />
-      <h2 className="text-2xl mt-20 mx-2 underline"></h2>
-      <p className="text-2xl m-2">{searchValue}</p>
-
-      </div>
+        <div>
+          <Search onSearch={handleSearch} />
+          {/* <h2 className="text-2xl mt-20 mx-2 underline"></h2>
+          <p className="text-2xl m-2">{searchValue}</p> */}
+        </div>
         {error ? <p>{error}</p> : null}
         {isLoading ? (
           <p className="text-3xl my-[10%] font-black">Loading...</p>

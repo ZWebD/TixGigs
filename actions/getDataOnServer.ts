@@ -28,17 +28,25 @@ const day = date.getDate();
 const startDate = `${year}-${month < 10 ? `0${month}` : month}-${
   day < 10 ? `0${day}` : day
 }`;
-const endDate = "2024-01-31";
+const endDate = `${year + 1}-${month < 10 ? `0${month}` : month}-${
+  day < 10 ? `0${day}` : day
+}`;
+
 const sortBy = "popularity";
 const size = 20; // Maximum number of events per page
 const countryCode = "GB";
 
-const url = `https://app.ticketmaster.com/discovery/v2/events.json?keyword=${keyword}&startDate=${startDate}&endDate=${endDate}&sortBy=${sortBy}&size=${size}&apikey=${apiKey}&countryCode=${countryCode}`;
+let url;
 
-export const getDataOnServer = async () => {
+export const getDataOnServer = async (props: any) => {
+  !props
+    ? (url = `https://app.ticketmaster.com/discovery/v2/events.json?keyword=${keyword}&startDate=${startDate}&endDate=${endDate}&sortBy=${sortBy}&size=${size}&apikey=${apiKey}&countryCode=${countryCode}`)
+    : (url = `https://app.ticketmaster.com/discovery/v2/events.json?keyword=${props}&apikey=${apiKey}&countryCode=${countryCode}`);
   let data: Data;
   let isError = false;
   let error = "";
+
+  console.log(url);
 
   try {
     const res = await fetch(url);
