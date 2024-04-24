@@ -10,7 +10,7 @@ export default function Intro() {
         </h1>
         <div className="px-[10%]">
           <h2 className="text-xl md:text-3xl mb-[4%]">
-            Where you can find what you looking for!
+            Where you can find what you&#39;re looking for!
           </h2>
           <p>Music, Sport, Arts, Theatre, Comedy and many more</p>
         </div>

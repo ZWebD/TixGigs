@@ -34,8 +34,11 @@ const Events = () => {
     setIsLoading(true);
     const { data, isError, error } = await getDataOnServer(searchValue);
     setIsLoading(false);
-    if (!isError) setData(data);
-    else {
+    if (!isError) {
+      setData(data);
+      setError("");
+      setIsError(false);
+    } else {
       setIsError(isError);
       setError(error);
     }
@@ -46,7 +49,6 @@ const Events = () => {
   }, [getData]);
 
   const handleSearch = (value: string) => {
-    console.log(value);
     setSearchValue(value);
   };
 
@@ -56,14 +58,20 @@ const Events = () => {
         <div>
           <Search onSearch={handleSearch} />
         </div>
-        {error ? <p>{error}</p> : null}
         {isLoading ? (
           <p className="text-3xl my-[10%] font-black">Loading...</p>
         ) : null}
-        {isError ? <p>Error</p> : null}
+        {error ? console.log(error) : null}
+        {isError ? (
+          <p className="text-3xl my-[10%] font-black">{`There is no search result for "${searchValue}"`}</p>
+        ) : null}
         {data ? (
-          <div>
-            <h2 className=" text-3xl my-[10%] font-black">Upcoming Events</h2>
+          <div className="mt-[20%]">
+            <h2 className=" text-3xl mb-[10%] font-black">
+              {!searchValue
+                ? `Upcoming Events`
+                : `Results for "${searchValue}"`}
+            </h2>
             <span className="flex flex-col sm:flex-row flex-wrap lg:max-w-[85%] mx-auto">
               {data?.map((event, n) => (
                 <section

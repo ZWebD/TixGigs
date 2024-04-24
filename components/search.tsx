@@ -23,7 +23,7 @@ export default function Search(props: SearchProps) {
   };
 
   return (
-    <div className="relative w-full text-gray-600 ">
+    <div className="relative max-lg:w-[85%] max-2xl:w-[75%] 2xl:w-[65%] mx-auto text-gray-600 my-[30%] md:my-[20%]">
       <input
         type="search"
         name="search"

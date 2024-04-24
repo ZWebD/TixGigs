@@ -47,7 +47,7 @@ export default function Events(props: any) {
 
   return (
     <div
-      className="relative overflow-hidden rounded-lg justify-items-stretch justify-evenly flex flex-col sm:group-even:ml-[18rem] max-w[42rem] group-even:pl-10 group-odd:pl-10 border border-black/5 bg-gray-100 hover:bg-gray-200 transition dark:bg-white/10 dark:hover:bg-white/20 dark:text-white"
+      className="relative overflow-hidden rounded-lg justify-items-stretch justify-evenly flex flex-col sm:group-even:ml-[18rem] max-w[42rem] group-even:pl-10 group-odd:pl-10 border border-black/5 hover:bg-gray-200 transition"
       style={divBgColor}
     >
       <div className=" whitespace-pre-line sm:max-w-auto flex flex-col sm:group-even:ml-[18rem]">
