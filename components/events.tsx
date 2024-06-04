@@ -1,34 +1,37 @@
 "use client";
 
-import { getDataOnServer } from "@/actions/getDataOnServer";
+import { getDataOnServer, Data } from "@/actions/getDataOnServer";
 import { useCallback, useEffect, useState } from "react";
 import React from "react";
 import Event from "./event";
 import Search from "@/components/search";
+import SearchBar from "./searchBar";
 
-type Data = [
-  {
-    name: string;
-    url: string;
-    promoter: string;
-    images: [
-      {
-        ratio: string;
-        url: string;
-        width: number;
-        height: number;
-        fallback: boolean;
-      }
-    ];
-  }
-];
+// type Data = [
+//   {
+//     name: string;
+//     url: string;
+//     promoter: string;
+//     images: [
+//       {
+//         ratio: string;
+//         url: string;
+//         width: number;
+//         height: number;
+//         fallback: boolean;
+//       }
+//     ];
+//   }
+// ];
+
+// Need to separate searching for name suggestion!
 
 const Events = () => {
-  const [data, setData] = useState<Data>();
-  const [error, setError] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
-  const [isError, setIsError] = useState(false);
-  const [searchValue, setSearchValue] = useState("");
+  const [data, setData] = useState<Data>(),
+    [error, setError] = useState(""),
+    [isLoading, setIsLoading] = useState(false),
+    [isError, setIsError] = useState(false),
+    [searchValue, setSearchValue] = useState("");
 
   const getData = useCallback(async () => {
     setIsLoading(true);
@@ -48,6 +51,8 @@ const Events = () => {
     getData();
   }, [getData]);
 
+  //--------------------------------------------
+
   const handleSearch = (value: string) => {
     setSearchValue(value);
   };
@@ -56,7 +61,8 @@ const Events = () => {
     <section>
       <>
         <div>
-          <Search onSearch={handleSearch} />
+          {/* <SearchBar onSearch={handleSearch} /> */}
+          <SearchBar onSearch={handleSearch} />
         </div>
         {isLoading ? (
           <p className="text-3xl my-[10%] font-black">Loading...</p>
@@ -64,7 +70,9 @@ const Events = () => {
         {error ? console.log(error) : null}
         {isError ? (
           <p className="text-3xl my-[10%] font-black">{`There is no search result for "${searchValue}"`}</p>
-        ) : null}
+        ) : (
+          ``
+        )}
         {data ? (
           <div className="mt-[20%]">
             <h2 className=" text-3xl mb-[10%] font-black">

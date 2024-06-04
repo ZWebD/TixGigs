@@ -1,4 +1,7 @@
 {
   "scm.alwaysShowActions": true,
-  "scm.alwaysShowRepositories": true
+  "scm.alwaysShowRepositories": true,
+  "editor.quickSuggestions": {
+    "strings": true
+  }
 }

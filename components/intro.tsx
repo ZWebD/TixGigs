@@ -1,5 +1,8 @@
+"use client";
+
 import React from "react";
 import Image from "next/image";
+import { motion } from "framer-motion";
 
 export default function Intro() {
   return (
@@ -9,9 +12,9 @@ export default function Intro() {
           Welcome to TixGigs!
         </h1>
         <div className="px-[10%]">
-          <h2 className="text-xl md:text-3xl mb-[4%]">
+          <motion.h2 className="text-xl md:text-3xl mb-[4%]">
             Where you can find what you&#39;re looking for!
-          </h2>
+          </motion.h2>
           <p>Music, Sport, Arts, Theatre, Comedy and many more</p>
         </div>
       </div>

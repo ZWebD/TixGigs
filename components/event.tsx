@@ -1,5 +1,4 @@
 import React from "react";
-import Image from "next/image";
 import useExtractColor from "@/actions/useExtractColor";
 
 let url = "";
@@ -13,16 +12,21 @@ export default function Events(props: any) {
   });
 
   const divBgImage = {
-    backgroundImage: "url(" + url + ")",
-    backgroundSize: "cover",
-    backgroundRepeat: "no-repeat",
-    backgroundPosition: "top",
-  };
-  const { lighterColor } = useExtractColor(url, { format: "rgba" });
+      backgroundImage: "url(" + url + ")",
+      backgroundSize: "cover",
+      backgroundRepeat: "no-repeat",
+      backgroundPosition: "top",
+    },
+    { lighterColor } = useExtractColor(url, { format: "rgba" }),
+    // Adding alpha value to RGB color
 
-  // Adding alpha value to RGB color
-
-  const rgbaBg = rgbToRgba(lighterColor, 0.4);
+    rgbaBg = rgbToRgba(lighterColor, 0.4),
+    divBgColor = {
+      backgroundColor: `${lighterColor}`,
+    },
+    divBgColorOpacity = {
+      backgroundColor: `${rgbaBg}`,
+    };
 
   function rgbToRgba(rgb: any, alpha: number) {
     const match = rgb?.match(
@@ -30,20 +34,13 @@ export default function Events(props: any) {
     );
     if (!match) return null;
 
-    const r = parseInt(match[1]);
-    const g = parseInt(match[2]);
-    const b = parseInt(match[3]);
-    const a = alpha;
+    const r = parseInt(match[1]),
+      g = parseInt(match[2]),
+      b = parseInt(match[3]),
+      a = alpha;
 
     return `rgba(${r},${g},${b},${a})`;
   }
-
-  const divBgColor = {
-    backgroundColor: `${lighterColor}`,
-  };
-  const divBgColorOpacity = {
-    backgroundColor: `${rgbaBg}`,
-  };
 
   return (
     <div
