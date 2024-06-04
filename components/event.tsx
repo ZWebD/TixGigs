@@ -12,21 +12,21 @@ export default function Events(props: any) {
   });
 
   const divBgImage = {
-      backgroundImage: "url(" + url + ")",
-      backgroundSize: "cover",
-      backgroundRepeat: "no-repeat",
-      backgroundPosition: "top",
-    },
-    { lighterColor } = useExtractColor(url, { format: "rgba" }),
-    // Adding alpha value to RGB color
+    backgroundImage: "url(" + url + ")",
+    backgroundSize: "cover",
+    backgroundRepeat: "no-repeat",
+    backgroundPosition: "top",
+  };
+  const { lighterColor } = useExtractColor(url, { format: "rgba" });
+  // Adding alpha value to RGB color
 
-    rgbaBg = rgbToRgba(lighterColor, 0.4),
+  const rgbaBg = rgbToRgba(lighterColor, 0.4),
     divBgColor = {
       backgroundColor: `${lighterColor}`,
-    },
-    divBgColorOpacity = {
-      backgroundColor: `${rgbaBg}`,
     };
+  const divBgColorOpacity = {
+    backgroundColor: `${rgbaBg}`,
+  };
 
   function rgbToRgba(rgb: any, alpha: number) {
     const match = rgb?.match(
@@ -34,10 +34,10 @@ export default function Events(props: any) {
     );
     if (!match) return null;
 
-    const r = parseInt(match[1]),
-      g = parseInt(match[2]),
-      b = parseInt(match[3]),
-      a = alpha;
+    const r = parseInt(match[1]);
+    const g = parseInt(match[2]);
+    const b = parseInt(match[3]);
+    const a = alpha;
 
     return `rgba(${r},${g},${b},${a})`;
   }

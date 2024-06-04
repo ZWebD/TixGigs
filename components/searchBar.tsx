@@ -14,12 +14,12 @@ export type SearchProps = {
 };
 
 export default function Search(props: SearchProps) {
-  const { onSearch } = props,
-    placeholderValue = `Enter search...`,
-    [value, setValue] = useState(placeholderValue),
-    [visible, setVisible] = useState(false),
-    [query, setQuery] = useState(""),
-    inputRef: any = useRef();
+  const { onSearch } = props;
+  const placeholderValue = `Enter search...`;
+  const [value, setValue] = useState(placeholderValue);
+  const [visible, setVisible] = useState(false);
+  const [query, setQuery] = useState("");
+  const inputRef: any = useRef();
 
   // const searchHandler = (event: ChangeEvent<HTMLInputElement>) => {
   //   const { target } = event;
@@ -30,11 +30,11 @@ export default function Search(props: SearchProps) {
   //   // onSearch(target.value);
   // };
 
-  const [data, setData] = useState<Data>(),
-    [error, setError] = useState(""),
-    [isError, setIsError] = useState(false),
-    // [suggestionList, setSuggestionList] = useState([]);
-    suggestionList: any = [];
+  const [data, setData] = useState<Data>();
+  const [error, setError] = useState("");
+  const [isError, setIsError] = useState(false);
+  // const [suggestionList, setSuggestionList] = useState([]);
+  const suggestionList: any = [];
 
   const getData = useCallback(async () => {
     const { data, isError, error } = await getDataOnServer(query);

@@ -27,11 +27,11 @@ import SearchBar from "./searchBar";
 // Need to separate searching for name suggestion!
 
 const Events = () => {
-  const [data, setData] = useState<Data>(),
-    [error, setError] = useState(""),
-    [isLoading, setIsLoading] = useState(false),
-    [isError, setIsError] = useState(false),
-    [searchValue, setSearchValue] = useState("");
+  const [data, setData] = useState<Data>();
+  const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
+  const [searchValue, setSearchValue] = useState("");
 
   const getData = useCallback(async () => {
     setIsLoading(true);
