@@ -21,6 +21,7 @@ export default function Search(props: SearchProps) {
   const [query, setQuery] = useState("");
   const inputRef: any = useRef();
 
+  // knfdkj
   // const searchHandler = (event: ChangeEvent<HTMLInputElement>) => {
   //   const { target } = event;
   //   setValue(target.value);
