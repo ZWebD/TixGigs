@@ -16,12 +16,12 @@ export type SearchProps = {
 export default function Search(props: SearchProps) {
   const { onSearch } = props;
   const placeholderValue = `Enter search...`;
-  const [value, setValue] = useState(placeholderValue);
+  const [value, setValue] = useState("");
   const [visible, setVisible] = useState(false);
-  const [query, setQuery] = useState("");
-  const inputRef: any = useRef();
 
-  // knfdkj
+  const inputRef: any = useRef();
+  const [filteredData, setFilteredData] = useState([]);
+
   // const searchHandler = (event: ChangeEvent<HTMLInputElement>) => {
   //   const { target } = event;
   //   setValue(target.value);
@@ -38,7 +38,7 @@ export default function Search(props: SearchProps) {
   const suggestionList: any = [];
 
   const getData = useCallback(async () => {
-    const { data, isError, error } = await getDataOnServer(query);
+    const { data, isError, error } = await getDataOnServer(value);
 
     if (!isError) {
       setData(data);
@@ -48,7 +48,7 @@ export default function Search(props: SearchProps) {
       setIsError(isError);
       setError(error);
     }
-  }, [setData, setError, setIsError, query]);
+  }, [setData, setError, setIsError, value]);
 
   useEffect(() => {
     getData();
@@ -59,7 +59,16 @@ export default function Search(props: SearchProps) {
   }
 
   const onChange = (e: any) => {
-    setQuery(e.target.value);
+    const filtered = suggestionList?.filter((sug: string) =>
+      sug.toLowerCase().includes(value.toLocaleLowerCase())
+    );
+    console.log(filtered.length);
+
+    if (filtered.length != 0) {
+      setVisible((prev) => !prev);
+      setFilteredData(filtered);
+    }
+    setValue(e.target.value);
     // suggestionList.filter((sug: string) =>
     //   sug.toLowerCase().includes(query.toLocaleLowerCase())
     // );
@@ -69,7 +78,7 @@ export default function Search(props: SearchProps) {
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter") {
       setVisible((prev) => !prev);
-      onSearch(query);
+      onSearch(value);
     }
   };
 
@@ -92,14 +101,15 @@ export default function Search(props: SearchProps) {
         type="search"
         name="search"
         ref={inputRef}
-        placeholder={value}
+        placeholder="Enter search..."
         className="bg-white h-10 px-5 pr-10 w-full rounded-full text-sm focus:outline-none"
-        value={query}
+        value={value}
         onChange={
           onChange
           // searchHandler
         }
         onKeyDown={handleKeyDown}
+        onFocus={(e) => e.target.setAttribute("autoComplete", "false")}
       />
       <button type="submit" className="absolute right-0 mt-3 mr-4">
         <svg
@@ -116,28 +126,24 @@ export default function Search(props: SearchProps) {
       </button>
       <div
         className={`absolute ${
-          !visible && !query ? "hidden" : "visible"
+          !visible ? "hidden" : "visible"
         } mt-1 w-full p-2 bg-white shadow-2xl rounded-3xl max-h36 overflow-y-auto `}
       >
-        {suggestionList
-          .filter((sug: string) =>
-            sug.toLowerCase().includes(query.toLocaleLowerCase())
-          )
-          .map((event: any, i: any) => {
-            if (!event) {
-              setVisible((prev) => !prev);
-            } else
-              return (
-                <div
-                  key={i}
-                  className=" cursor-pointer hover:bg-black hover:bg-opacity-10 p-2 rounded-full"
-                >
-                  <p id={i} onClick={handleClick}>
-                    {event}
-                  </p>
-                </div>
-              );
-          })}
+        {filteredData?.map((event: any, i: any) => {
+          if (!event) {
+            setVisible((prev) => !prev);
+          } else
+            return (
+              <div
+                key={i}
+                className=" cursor-pointer hover:bg-black hover:bg-opacity-10 p-2 rounded-full"
+              >
+                <p id={i} onClick={handleClick}>
+                  {event}
+                </p>
+              </div>
+            );
+        })}
       </div>
     </div>
   );
