@@ -7,7 +7,7 @@ import React, {
   useRef,
   useState,
 } from "react";
-import { getDataOnServer, Data } from "@/actions/getDataOnServer";
+import { getDataOnServer, EventData } from "@/actions/getDataOnServer";
 
 export type SearchProps = {
   onSearch: (value: string) => void;
@@ -15,27 +15,15 @@ export type SearchProps = {
 
 export default function Search(props: SearchProps) {
   const { onSearch } = props;
-  const placeholderValue = `Enter search...`;
   const [value, setValue] = useState("");
   const [visible, setVisible] = useState(false);
 
-  const inputRef: any = useRef();
-  const [filteredData, setFilteredData] = useState([]);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const [filteredData, setFilteredData] = useState<string[]>([]);
 
-  // const searchHandler = (event: ChangeEvent<HTMLInputElement>) => {
-  //   const { target } = event;
-  //   setValue(target.value);
-  //   // console.log(inputRef.current.value);
-
-  //   // console.log(target.value);
-  //   // onSearch(target.value);
-  // };
-
-  const [data, setData] = useState<Data>();
+  const [data, setData] = useState<EventData[]>([]);
   const [error, setError] = useState("");
   const [isError, setIsError] = useState(false);
-  // const [suggestionList, setSuggestionList] = useState([]);
-  const suggestionList: any = [];
 
   const getData = useCallback(async () => {
     const { data, isError, error } = await getDataOnServer(value);
@@ -48,32 +36,29 @@ export default function Search(props: SearchProps) {
       setIsError(isError);
       setError(error);
     }
-  }, [setData, setError, setIsError, value]);
+  }, [value]);
 
   useEffect(() => {
     getData();
   }, [getData]);
 
-  {
-    data?.map((event) => suggestionList.push(event.name));
-  }
-
-  const onChange = (e: any) => {
-    const filtered = suggestionList?.filter((sug: string) =>
-      sug.toLowerCase().includes(value.toLocaleLowerCase())
-    );
-    console.log(filtered.length);
-
-    if (filtered.length != 0) {
-      setVisible((prev) => !prev);
+  useEffect(() => {
+    if (value.length > 0 && data.length != 0) {
+      setVisible(true);
+      const filtered = data
+        ?.map((event) => event.name)
+        .filter((sug: string) =>
+          sug.toLowerCase().includes(value.toLowerCase())
+        );
       setFilteredData(filtered);
+    } else {
+      setVisible(false);
     }
+  }, [value, data]);
+
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value);
-    // suggestionList.filter((sug: string) =>
-    //   sug.toLowerCase().includes(query.toLocaleLowerCase())
-    // );
   };
-  // console.log(suggestionList);
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter") {
@@ -90,9 +75,6 @@ export default function Search(props: SearchProps) {
     setValue(v);
     setVisible((prev) => !prev);
     onSearch(v);
-    // console.log(event.currentTarget.textContent);
-    // console.log(event.currentTarget.id);
-    // console.log(query);
   };
 
   return (
@@ -104,12 +86,9 @@ export default function Search(props: SearchProps) {
         placeholder="Enter search..."
         className="bg-white h-10 px-5 pr-10 w-full rounded-full text-sm focus:outline-none"
         value={value}
-        onChange={
-          onChange
-          // searchHandler
-        }
+        onChange={handleInputChange}
         onKeyDown={handleKeyDown}
-        onFocus={(e) => e.target.setAttribute("autoComplete", "false")}
+        onFocus={(e) => e.target.setAttribute("autoComplete", "off")}
       />
       <button type="submit" className="absolute right-0 mt-3 mr-4">
         <svg
@@ -127,23 +106,18 @@ export default function Search(props: SearchProps) {
       <div
         className={`absolute ${
           !visible ? "hidden" : "visible"
-        } mt-1 w-full p-2 bg-white shadow-2xl rounded-3xl max-h36 overflow-y-auto `}
+        } z-50 mt-1 w-full p-2 bg-white shadow-2xl rounded-3xl max-h36 overflow-y-auto `}
       >
-        {filteredData?.map((event: any, i: any) => {
-          if (!event) {
-            setVisible((prev) => !prev);
-          } else
-            return (
-              <div
-                key={i}
-                className=" cursor-pointer hover:bg-black hover:bg-opacity-10 p-2 rounded-full"
-              >
-                <p id={i} onClick={handleClick}>
-                  {event}
-                </p>
-              </div>
-            );
-        })}
+        {filteredData?.map((event: any, i: any) => (
+          <div
+            key={i}
+            className=" cursor-pointer hover:bg-black hover:bg-opacity-10 p-2 rounded-full"
+          >
+            <p id={i} onClick={handleClick}>
+              {event}
+            </p>
+          </div>
+        ))}
       </div>
     </div>
   );

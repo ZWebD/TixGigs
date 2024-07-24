@@ -4,27 +4,7 @@ import { getDataOnServer, Data } from "@/actions/getDataOnServer";
 import { useCallback, useEffect, useState } from "react";
 import React from "react";
 import Event from "./event";
-import Search from "@/components/search";
 import SearchBar from "./searchBar";
-
-// type Data = [
-//   {
-//     name: string;
-//     url: string;
-//     promoter: string;
-//     images: [
-//       {
-//         ratio: string;
-//         url: string;
-//         width: number;
-//         height: number;
-//         fallback: boolean;
-//       }
-//     ];
-//   }
-// ];
-
-// Need to separate searching for name suggestion!
 
 const Events = () => {
   const [data, setData] = useState<Data>();
@@ -61,7 +41,6 @@ const Events = () => {
     <section>
       <>
         <div>
-          {/* <SearchBar onSearch={handleSearch} /> */}
           <SearchBar onSearch={handleSearch} />
         </div>
         {isLoading ? (
