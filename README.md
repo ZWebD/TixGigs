@@ -8,4 +8,4 @@
         <li><strong>User-Friendly Interface:</strong> Navigate through a clean and intuitive design to easily find and view events.</li>
 </ul>
 
-<img src="https://github.com/ZWebD/TixGigs/blob/main/review.png" alt="screenshot">
+<kbd><img src="https://github.com/ZWebD/TixGigs/blob/main/review.png" alt="screenshot"></kbd>
